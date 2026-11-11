@@ -11,6 +11,6 @@ COPY . .
 RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH \
     go build -trimpath -ldflags "-s -w" -tags disable_grpc_modules -o /out/restic ./cmd/restic
 
-FROM alpine:3.24@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6
+FROM ghcr.io/loong64/alpine:3.24
 COPY --from=build /out/restic /usr/bin/restic
 ENTRYPOINT ["/usr/bin/restic"]
